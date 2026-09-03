@@ -14,9 +14,14 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
+    channel = bot.get_channel(channel-id-here)
+    if channel:
+        await channel.send("omg jex is lasbinas 😱\nTriple T has awoken!\nUse $cmds to get started!", silent=True)
+    else:
+        print("Channel not found. Check your CHANNEL_ID and bot permissions.")
 @bot.command()
 async def cmds(ctx):
-    await ctx.send(f"## **Command List**\n### All commands use $ prefix\naiask\ncoinflip\ndice\ndivide ($divide int int)\nhi\nkill\nmentionme\nmoney\nmultiply ($multiply int int)\nmyid\nmyuser\nmydisplay\nping\nshouldi")
+    await ctx.send(f"## **Command List**\n$aiask - Ask Gemini!\n-# Usage: $aiask ..........\n$coinflip - Flip a coin!\n$dice - Roll a 6-sided dice.\n$divide - Divides 2 numbers!\n-# Usage: $divide 20 2 (20 / 2).\n$hi - Salutations.\n$kill - just try it.\n$mentionme - Mentions your user!\n$money - Gives you a certain amount of money.\n$multiply - Multiplies two numbers!\n-# Usage: $multiply 2 4 (2 * 4)\n$myid- Gives your user ID.\n$myuser - Gives your discord username.\n$mydisplay - Gives your server and global display name.\n$ping - Check the bot's latency!\n$shouldi - Kinda like 8ball, but only shows yes and no.")
 @bot.command()
 async def dice(ctx):
     await ctx.send(f"You rolled a {random.randint(1, 6)}")
@@ -75,7 +80,7 @@ async def ask_ai(ctx, *, prompt: str):
                 model='gemini-3.5-flash-lite',
                 contents=prompt,
                 config={
-                    'system_instruction': 'You are a helpful, witty assistant in a Discord server. Keep responses concise.'
+                    'system_instruction': 'You are an assistant in a private personal Discord server. Keep responses fast but precise, informative, and accurate. act like tung tung tung sahur'
                 }
             )
             answer = response.text
@@ -87,4 +92,4 @@ async def ask_ai(ctx, *, prompt: str):
                 await ctx.send(answer)
         except Exception as e:
             await ctx.send(f"An error occurred while connecting to Gemini: {e}")
-bot.run("discord-key-here")
+bot.run("bot-token-here")
