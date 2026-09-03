@@ -7,14 +7,14 @@ import requests
 from google import genai
 intents = discord.Intents.default()
 intents.message_content = True
-GEMINI_KEY = "gemini-key-here"
+GEMINI_KEY = "geminikeyhere"
 ai_client = genai.Client(api_key=GEMINI_KEY)
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-    channel = bot.get_channel(channel-id-here)
+    channel = bot.get_channel(channelidhere)
     if channel:
         await channel.send("omg jex is lasbinas 😱\nTriple T has awoken!\nUse $cmds to get started!", silent=True)
     else:
@@ -27,11 +27,17 @@ async def dice(ctx):
     await ctx.send(f"You rolled a {random.randint(1, 6)}")
 @bot.command()
 async def coinflip(ctx):
-    result = random.choice(["Heads", "Tails"])
-    await ctx.send(f"The coin landed on {result}")
+    roll = random.randint(1,100)
+    if roll >= 49:
+        verdict = "Heads"
+    elif roll <= 98:
+        verdict = "Tails"
+    else:
+        verdict = "its side..."
+    await ctx.send(f"The coin landed on {verdict}")
 @bot.command()
 async def hi(ctx):
-    hi = random.choice(["hiiiii", "hi", "haaaiiii", "hai"])
+    hi = random.choice(["hiiiii", "hi", "haaaiiii", "hai", "hewwo"])
     await ctx.send(f"{hi}")
 @bot.command()
 async def money(ctx):
@@ -80,7 +86,7 @@ async def ask_ai(ctx, *, prompt: str):
                 model='gemini-3.5-flash-lite',
                 contents=prompt,
                 config={
-                    'system_instruction': 'You are an assistant in a private personal Discord server. Keep responses fast but precise, informative, and accurate. act like tung tung tung sahur'
+                    'system_instruction': 'You are an assistant in a private personal Discord server. Keep responses fast but precise, informative, and accurate. Act like a goofy fella who is like a companion and best friend.'
                 }
             )
             answer = response.text
@@ -92,4 +98,4 @@ async def ask_ai(ctx, *, prompt: str):
                 await ctx.send(answer)
         except Exception as e:
             await ctx.send(f"An error occurred while connecting to Gemini: {e}")
-bot.run("bot-token-here")
+bot.run("bottokenhere")
